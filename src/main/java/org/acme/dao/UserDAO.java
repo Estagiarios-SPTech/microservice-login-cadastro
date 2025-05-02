@@ -39,4 +39,23 @@ public class UserDAO {
         }
         return null;
     }
+
+    public User findById(Integer id){
+        try(Connection conectar = conexao.conectarBanco()){
+            PreparedStatement query = conectar.prepareStatement("select * from users where id = ?");
+            query.setInt(1, id);
+            ResultSet resultado = query.executeQuery();
+            while(resultado.next()){
+                return new User(resultado.getInt("id"),
+                        resultado.getString("name"),
+                        resultado.getString("email"),
+                        resultado.getString("role"),
+                        resultado.getString("password"));
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException("Erro ao procurar o usuário");
+        }
+        return null;
+    }
 }

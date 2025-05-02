@@ -16,11 +16,19 @@ public class UserService {
         ){
             throw new RuntimeException("Nenhum campo pode ser nulo");
         }
-        if(user.getName().isBlank() || user.getEmail().isBlank() ||
+        else if(user.getName().isBlank() || user.getEmail().isBlank() ||
           user.getRole().isBlank() || user.getPassword().isBlank()
         ){
             throw new RuntimeException("Nenhum campo pode estar vazio");
         }
+        else if(!user.getRole().equals("Admin") && !user.getRole().equals("RT") &&
+                !user.getRole().equals("Gerente") && !user.getRole().equals("Colaborador")){
+            throw new RuntimeException("Role não permitido");
+        }
         return userDAO.insert(user);
+    }
+
+    public User retornarUsuariosRelacionados(Integer id){
+        return userDAO.findById(id);
     }
 }
