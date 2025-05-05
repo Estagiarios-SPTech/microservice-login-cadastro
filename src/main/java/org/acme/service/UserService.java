@@ -10,6 +10,9 @@ public class UserService {
     @Inject
     UserDAO userDAO;
 
+    @Inject
+    TokenService tokenService;
+
     public User cadastrarUsuario(User user){
         if(user.getName() == null || user.getEmail() == null ||
         user.getRole() == null || user.getPassword() == null
@@ -29,20 +32,17 @@ public class UserService {
     }
 
     public User retornarUsuariosRelacionados(Integer id){
-        if(userDAO.findById(id) != null){
+        if(userDAO.findById(id) == null){
             throw new RuntimeException("Usuário inexistente");
         }
         return userDAO.findById(id);
     }
-    private final UserDAO userDao;
 
-    @Inject
-    public UserService(UserDAO userDao) {
-        this.userDao = userDao;
+    public String login(User user){
+        User usuarioEncontrado =  userDAO.autenticarLogin(user.getEmail(), user.getPassword());
+        if(usuarioEncontrado == null){
+            throw new RuntimeException("Login inválido");
+        }
+        return tokenService.gerarToken(usuarioEncontrado);
     }
-
-    public boolean login(String email, String password){
-        return userDao.autenticarLogin(email, password);
-    }
-
 }

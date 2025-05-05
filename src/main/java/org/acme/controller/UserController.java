@@ -1,5 +1,7 @@
 package org.acme.controller;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -15,22 +17,12 @@ import org.acme.service.UserService;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/user")
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import org.acme.model.User;
-import org.acme.service.UserService;
-
-@Path("teste")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class UserController {
     @Inject
     UserService userService;
 
     @POST
+    @RolesAllowed({"Admin"})
     @Path("/cadastrar")
     public Response endpointCadastrar(User user){
         if(user.getRole().equals("Colaborador")){
@@ -40,9 +32,9 @@ public class UserController {
     }
 
     @POST
-    @Transactional
+    @PermitAll()
     @Path("/login")
     public Response login(User usuario){
-        return Response.ok(userService.login(usuario.getEmail(), usuario.getPassword())).build();
+        return Response.ok(userService.login(usuario)).build();
     }
 }

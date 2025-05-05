@@ -4,7 +4,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.Conexao;
 import org.acme.model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +54,28 @@ public class UserDAO {
         }
         catch (SQLException e){
             throw new RuntimeException("Erro ao procurar o usuário");
+        }
+        return null;
+    }
+
+    public User autenticarLogin(String email, String password) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (Connection conn = conexao.conectarBanco();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getString("password"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao autenticar login: " + e.getMessage(), e);
         }
         return null;
     }

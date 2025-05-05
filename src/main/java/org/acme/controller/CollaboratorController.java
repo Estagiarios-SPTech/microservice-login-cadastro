@@ -1,5 +1,6 @@
 package org.acme.controller;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -20,6 +21,7 @@ public class CollaboratorController {
     CollaboratorService collaboratorService;
 
     @POST
+    @RolesAllowed({"Admin", "RT"})
     @Path("/cadastrar")
     public Response cadastrar(Collaborator collaborator){
         return Response.ok(collaboratorService.cadastrarColaborador(collaborator)).build();

@@ -28,4 +28,9 @@ create table ordensFornecimento (
 	`status` varchar(30),
 	created_at datetime,
 	updated_at datetime
-)
+);
+
+insert into users (`name`, email, `role`, `password`) values ('Rafael', 'rafael@stefanini.com', 'Admin', '123');
+
+select * from users;
+select * from employees;
