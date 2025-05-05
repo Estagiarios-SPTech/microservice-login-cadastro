@@ -24,7 +24,7 @@ Este microserviço oferece endpoints REST para **autenticação** (login) e **ca
 
 ## Pré-requisitos
 
-- **Java 17+**
+- **Java 21+**
 - **Maven**
 - **Quarkus CLI**
 - **MySQL**
