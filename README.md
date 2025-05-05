@@ -47,7 +47,7 @@ Este microserviço oferece endpoints REST para **autenticação** (login) e **ca
    cd microservice-login-cadastro
 
 2. Instale as dependências e rode o serviço em modo desenvolvedor
-3. 
+   
 ```shell script
 ./mvnw quarkus:dev
 ```
