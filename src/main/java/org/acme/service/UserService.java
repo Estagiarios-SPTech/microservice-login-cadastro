@@ -34,4 +34,15 @@ public class UserService {
         }
         return userDAO.findById(id);
     }
+    private final UserDAO userDao;
+
+    @Inject
+    public UserService(UserDAO userDao) {
+        this.userDao = userDao;
+    }
+
+    public boolean login(String email, String password){
+        return userDao.autenticarLogin(email, password);
+    }
+
 }
