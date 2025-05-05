@@ -68,6 +68,7 @@ Há quatro categorias de role
 - Outro
 
 Apenas Admin e RT podem cadastrar outros colaboradores após realizar login e coletar o token obtido em resposta. 
-O cadastro por ser realizado pela localhost:8080/users/cadastrar
+O cadastro pode ser realizado pela url
+`localhost:8080/users/cadastrar`
 
 
