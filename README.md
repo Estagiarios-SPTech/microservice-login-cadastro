@@ -1,70 +1,69 @@
 # microservice-login-cadastro
+Este projeto é um microserviço para login e cadastro dos colaboradores do sistema de controle de ordens de fornecimento.
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Estrutura do projeto
+microservice-login-cadastro/
+├── src
+├── target
+├── dockerignore
+├── gitignore
+├── mvn
+├── pom.xml
+├── README.md
+└── scriptBanco
 
-## Running the application in dev mode
+## Descrição
+Este microserviço oferece endpoints REST para **autenticação** (login) e **cadastro** de usuários, com controle de permissões por tipo de usuário (role). Utiliza o framework Quarkus para realizar isso.
 
-You can run your application in dev mode that enables live coding using:
+---
 
+## Pré-requisitos
+
+- **Java 17+**
+- **Maven**
+- **Quarkus CLI**
+- **MySQL**
+
+---
+
+## Configuração do Banco de Dados
+
+1. **Crie o banco de dados no MySQL**.
+2. **Execute o script de criação:**  
+   No MySQL Workbench, execute o arquivo `scriptBanco` para criar as tabelas e estruturas necessárias.
+
+---
+
+## Como Rodar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seuusuario/microservice-login-cadastro.git
+   cd microservice-login-cadastro
+
+2. Instale as dependências e rode o serviço em modo desenvolvedor
+3. 
 ```shell script
 ./mvnw quarkus:dev
 ```
+3. Certifique-se de que o banco de dados está configurado corretamente em:
+   
+`src/main/resources/application.properties`
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## Acessar aplicação pela porta 8080
 
-## Packaging and running the application
+http://localhost:8080
 
-The application can be packaged using:
+## Roles
 
-```shell script
-./mvnw package
-```
+Há quatro categorias de role 
+- Admin 
+- RT
+- Manager
+- Outro
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+Apenas Admin e RT podem cadastrar outros colaboradores após realizar login e coletar o token obtido em resposta. 
+O cadastro por ser realizado pela localhost:8080/users/cadastrar
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/microservice-login-cadastro-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- SmallRye JWT ([guide](https://quarkus.io/guides/security-jwt)): Secure your applications with JSON Web Token
-- JDBC Driver - MySQL ([guide](https://quarkus.io/guides/datasource)): Connect to the MySQL database via JDBC
-- SmallRye JWT Build ([guide](https://quarkus.io/guides/security-jwt-build)): Create JSON Web Token with SmallRye JWT Build API
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
