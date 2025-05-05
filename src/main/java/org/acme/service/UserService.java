@@ -29,6 +29,9 @@ public class UserService {
     }
 
     public User retornarUsuariosRelacionados(Integer id){
+        if(userDAO.findById(id) != null){
+            throw new RuntimeException("Usuário inexistente");
+        }
         return userDAO.findById(id);
     }
 }

@@ -22,6 +22,9 @@ public class UserController {
     @POST
     @Path("/cadastrar")
     public Response endpointCadastrar(User user){
+        if(user.getRole().equals("Colaborador")){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
         return Response.ok(userService.cadastrarUsuario(user)).build();
     }
 }
