@@ -65,7 +65,7 @@ Há quatro categorias de role
 - Admin 
 - RT
 - Manager
-- Outro
+- Colaborador
 
 Apenas Admin e RT podem cadastrar outros colaboradores após realizar login e coletar o token obtido em resposta. 
 O cadastro pode ser realizado pela url
