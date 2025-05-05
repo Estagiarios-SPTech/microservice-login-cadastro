@@ -3,15 +3,19 @@ Este projeto é um microserviço para login e cadastro dos colaboradores do sist
 
 
 ## Estrutura do projeto
+
+```
 microservice-login-cadastro/
-├── src
-├── target
-├── dockerignore
-├── gitignore
-├── mvn
+├── src/
+├── target/
+├── .dockerignore
+├── .gitignore
+├── mvnw
 ├── pom.xml
 ├── README.md
 └── scriptBanco
+
+```
 
 ## Descrição
 Este microserviço oferece endpoints REST para **autenticação** (login) e **cadastro** de usuários, com controle de permissões por tipo de usuário (role). Utiliza o framework Quarkus para realizar isso.
