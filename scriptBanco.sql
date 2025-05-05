@@ -12,10 +12,10 @@ create table users (
 
 create table employees (
 	id int primary key auto_increment,
-    `user` int, 
-    rt int, 
-    manager int,
-    `status` varchar(30)
+    `user` int, foreign key (`user`) references users(id), 
+    rt int, foreign key (rt) references users(id),
+    manager int, foreign key (manager) references users(id)
+    
 );
 
 create table ordensFornecimento (
