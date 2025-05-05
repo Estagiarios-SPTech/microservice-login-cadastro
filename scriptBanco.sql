@@ -1,3 +1,4 @@
+drop database if exists ordensof;
 create database ordensof;
 
 use ordensof;
@@ -12,16 +13,19 @@ create table users (
 
 create table employees (
 	id int primary key auto_increment,
-    `user` int, 
-    rt int, 
+    `user` int,
+    rt int,
     manager int,
-    `status` varchar(30)
+    `status` varchar(30),
+    foreign key (`user`) references users(id),
+    foreign key (rt) references users(id),
+    foreign key (manager) references users(id)
 );
 
 create table ordensFornecimento (
 	codigo int primary key auto_increment,
 	`description` varchar(250),
 	`status` varchar(30),
-	created_at datetime, 
+	created_at datetime,
 	updated_at datetime
 )
