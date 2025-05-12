@@ -34,7 +34,19 @@ public class UserController {
     @POST
     @PermitAll()
     @Path("/login")
-    public Response login(User usuario){
-        return Response.ok(userService.login(usuario)).build();
+    public Response login(User usuario) {
+        if (usuario == null || usuario.getEmail() == null || usuario.getPassword() == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Email e senha são obrigatórios")
+                    .build();
+        }
+
+        try {
+            return Response.ok(userService.login(usuario)).build();
+        } catch (RuntimeException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage())
+                    .build();
+        }
     }
 }
