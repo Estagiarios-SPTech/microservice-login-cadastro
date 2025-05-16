@@ -72,4 +72,15 @@ class UserControllerTest {
                     .statusCode(400);
         }
 
+    @Test
+    public void testLoginWithNoRequest() {
+        given()
+                .contentType(ContentType.JSON)
+                .body("")
+                .when()
+                .post("/user/login")
+                .then()
+                .statusCode(400);
+    }
+
 }

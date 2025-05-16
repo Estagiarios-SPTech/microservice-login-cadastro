@@ -3,6 +3,7 @@ package org.acme.dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.Conexao;
+import org.acme.exceptions.UserNotRegisteredException;
 import org.acme.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,10 @@ import java.sql.SQLException;
 public class UserDAO {
     @Inject
     Conexao conexao;
+
+    public UserDAO(Conexao conexao) {
+        this.conexao = conexao;
+    }
 
     public User insert(User user){
         try(Connection conectar = conexao.conectarBanco() ){
@@ -72,11 +77,16 @@ public class UserDAO {
                         rs.getString("email"),
                         rs.getString("role"),
                         rs.getString("password"));
+            } else {
+                throw new UserNotRegisteredException("Usuário não encontrado");
             }
 
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao autenticar login: " + e.getMessage(), e);
+        } catch (UserNotRegisteredException e) {
+            System.out.println(e.getMessage());
         }
+
         return null;
     }
 }
