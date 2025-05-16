@@ -6,6 +6,15 @@ public class Collaborator {
     private User rt;
     private User manager;
 
+    public Collaborator() {
+    }
+
+    public Collaborator(User collaborator, User rt, User manager) {
+        this.collaborator = collaborator;
+        this.rt = rt;
+        this.manager = manager;
+    }
+
     public Collaborator(Integer id, User collaborator, User rt, User manager) {
         this.id = id;
         this.collaborator = collaborator;

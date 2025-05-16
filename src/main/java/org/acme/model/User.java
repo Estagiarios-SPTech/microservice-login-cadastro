@@ -7,8 +7,18 @@ public class User {
     private String role;
     private String password;
 
-    public User(){
+    public User() {
+    }
 
+    public User(Integer id) {
+        this.id = id;
+    }
+
+    public User(String name, String email, String role, String password) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.password = password;
     }
 
     public User(Integer id, String name, String email, String role, String password) {

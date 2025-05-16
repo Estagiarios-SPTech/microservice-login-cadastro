@@ -17,7 +17,7 @@ public class CollaboratorDAO {
 
     public Collaborator insert(Collaborator collaborator){
         try(Connection conectar = conexao.conectarBanco()){
-            PreparedStatement query = conectar.prepareStatement("Insert into employees (user, rt, manager) values (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement query = conectar.prepareStatement("insert into employees (`user`, rt, manager) values (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             query.setObject(1, collaborator.getCollaborator().getId());
             query.setObject(2, collaborator.getRt().getId());
             query.setObject(3, collaborator.getManager().getId());
@@ -25,13 +25,11 @@ public class CollaboratorDAO {
 
             ResultSet chavePrimariaGerada = query.getGeneratedKeys();
             while(chavePrimariaGerada.next()){
-                return new Collaborator(chavePrimariaGerada.getInt(1),
-                        collaborator.getCollaborator(),
-                        collaborator.getRt(),
-                        collaborator.getManager());
+                collaborator.setId(chavePrimariaGerada.getInt(1));
+                return collaborator;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Insercao mal-sucedida");
         }
         return null;
     }

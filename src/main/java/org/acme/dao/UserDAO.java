@@ -25,16 +25,12 @@ public class UserDAO {
 
             ResultSet chavePrimariaCriada = query.getGeneratedKeys();
             while(chavePrimariaCriada.next()){
-                return new User(chavePrimariaCriada.getInt(1),
-                        user.getName(),
-                        user.getEmail(),
-                        user.getRole(),
-                        user.getPassword());
+                user.setId(chavePrimariaCriada.getInt(1));
+                return user;
             }
-
         }
         catch (SQLException e){
-            throw new RuntimeException("Insercao mal-sucedida\n" + e.getMessage());
+            throw new RuntimeException("Insercao mal-sucedida");
         }
         return null;
     }
