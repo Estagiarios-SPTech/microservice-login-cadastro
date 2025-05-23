@@ -30,14 +30,11 @@ public class CollaboratorService {
            !collaborator.getCollaborator().getRole().equals("Colaborador")){
             throw new RuntimeException("Usuário cadastrado não é colaborador");
         }
-        else if(collaborator.getCollaborator().getRole().equals("Colaborador") &&
-           collaborator.getRt().getRole().equals("RT") &&
-           collaborator.getManager().getRole().equals("Gerente")){
-            collaborator.setCollaborator(userService.cadastrarUsuario(collaborator.getCollaborator()));
-            return collaboratorDAO.insert(collaborator);
-        }
-        else{
+        if(!collaborator.getRt().getRole().equals("RT") ||
+           !collaborator.getManager().getRole().equals("Gerente")){
             throw new RuntimeException("Usuários informados nos campos errados");
         }
+        collaborator.setCollaborator(userService.cadastrarUsuario(collaborator.getCollaborator()));
+        return collaboratorDAO.insert(collaborator);
     }
 }

@@ -14,6 +14,17 @@ class CollaboratorServiceTest {
     CollaboratorService collaboratorService;
 
     @Test
+    public void classeCollaboratorNull(){
+        Collaborator collaborator = null;
+
+        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
+            collaboratorService.cadastrarColaborador(collaborator);
+        });
+
+        assertEquals("Collaborator não pode ser null" ,mensagemErro.getMessage());
+    }
+
+    @Test
     public void cadastrarColaboradorRoleNulo(){
         User user = new User("test",
                 "test@gmail.com",
@@ -52,7 +63,7 @@ class CollaboratorServiceTest {
     public void cadastrarColaboradorRTNulo(){
         User user = new User("test",
                 "test@gmail.com",
-                "Admin",
+                "Colaborador",
                 "123");
         User rt = new User(null);
         User gerente = new User(3);
@@ -71,7 +82,7 @@ class CollaboratorServiceTest {
     public void cadastrarColaboradorGerenteNulo(){
         User user = new User("test",
                 "test@gmail.com",
-                "Admin",
+                "Colaborador",
                 "123");
         User rt = new User(2);
         User gerente = new User(null);
@@ -84,99 +95,6 @@ class CollaboratorServiceTest {
         });
 
         assertEquals("Os usuários associados não podem ter o id nulo" ,mensagemErro.getMessage());
-    }
-
-    @Test
-    public void cadastrarColaboradorComRoleErrado(){
-        User user = new User("test",
-                "test@gmail.com",
-                "Admin",
-                "123");
-        User rt = new User(2);
-        User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
-                rt,
-                gerente);
-
-        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
-            collaboratorService.cadastrarColaborador(collaborator);
-        });
-
-        assertEquals("Usuário cadastrado não é colaborador" ,mensagemErro.getMessage());
-    }
-
-    @Test
-    public void colaboradorComResponsaveisInexistente(){
-        User user = new User("test",
-                "test@gmail.com",
-                "Colaborador",
-                "123");
-        User rt = new User(0);
-        User gerente = new User(0);
-        Collaborator collaborator = new Collaborator(user,
-                rt,
-                gerente);
-
-        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
-            collaboratorService.cadastrarColaborador(collaborator);
-        });
-
-        assertEquals("Usuário inexistente" ,mensagemErro.getMessage());
-    }
-
-    @Test
-    public void colaboradorComRoleInexistente(){
-        User user = new User("test",
-                "test@gmail.com",
-                "Estudante",
-                "123");
-        User rt = new User(2);
-        User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
-                rt,
-                gerente);
-
-        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
-            collaboratorService.cadastrarColaborador(collaborator);
-        });
-
-        assertEquals("Usuário cadastrado não é colaborador" ,mensagemErro.getMessage());
-    }
-
-    @Test
-    public void cadastrarColaborador(){
-        User user = new User("test",
-                "test@gmail.com",
-                "Colaborador",
-                "123");
-        User rt = new User(2);
-        User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
-                rt,
-                gerente);
-
-
-        assertEquals(collaborator, collaboratorService.cadastrarColaborador(collaborator));
-    }
-
-    @Test
-    public void cadastrarColaboradorComRoleVazio(){
-        User user = new User("test",
-                "test@gmail.com",
-                "",
-                "123");
-        User rt = new User(2);
-        User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
-                rt,
-                gerente);
-
-
-        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
-            collaboratorService.cadastrarColaborador(collaborator);
-        });
-
-        assertEquals("Usuário cadastrado não é colaborador" ,mensagemErro.getMessage());
     }
 
     @Test
@@ -218,13 +136,56 @@ class CollaboratorServiceTest {
     }
 
     @Test
-    public void classeCollaboratorNull(){
-        Collaborator collaborator = null;
+    public void cadastrarColaboradorComRoleErrado(){
+        User user = new User("test",
+                "test@gmail.com",
+                "Admin",
+                "123");
+        User rt = new User(2);
+        User gerente = new User(3);
+        Collaborator collaborator = new Collaborator(user,
+                rt,
+                gerente);
 
         RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
             collaboratorService.cadastrarColaborador(collaborator);
         });
 
-        assertEquals("Collaborator não pode ser null" ,mensagemErro.getMessage());
+        assertEquals("Usuário cadastrado não é colaborador" ,mensagemErro.getMessage());
+    }
+
+    @Test
+    public void colaboradorComResponsaveisInexistente(){
+        User user = new User("test",
+                "test@gmail.com",
+                "Colaborador",
+                "123");
+        User rt = new User(0);
+        User gerente = new User(0);
+        Collaborator collaborator = new Collaborator(user,
+                rt,
+                gerente);
+
+        RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
+            collaboratorService.cadastrarColaborador(collaborator);
+        });
+
+        assertEquals("Usuário inexistente" ,mensagemErro.getMessage());
+    }
+
+    @Test
+    public void cadastrarColaborador(){
+        User user = new User("test",
+                "test@gmail.com",
+                "Colaborador",
+                "123");
+        User rt = new User(2);
+        User gerente = new User(3);
+        Collaborator collaborator = new Collaborator(user,
+                rt,
+                gerente);
+
+
+        assertEquals(collaborator, collaboratorService.cadastrarColaborador(collaborator));
     }
 }
