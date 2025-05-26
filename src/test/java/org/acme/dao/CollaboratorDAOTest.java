@@ -56,8 +56,8 @@ class CollaboratorDAOTest {
 
         when(mockResultSet.next()).thenReturn(false);
 
-        Collaborator result = collaboratorDAO.insert(collaborator);
+        Collaborator resultado = collaboratorDAO.insert(collaborator);
 
-        assertNull(result, "O método deve retornar null quando não há chaves geradas");
+        assertNull(resultado, "O método deve retornar null quando não há chaves geradas");
     }
 }
