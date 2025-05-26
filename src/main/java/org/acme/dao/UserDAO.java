@@ -12,13 +12,18 @@ import java.sql.SQLException;
 
 @ApplicationScoped
 public class UserDAO {
-    @Inject
-    Conexao conexao;
 
+    private final Conexao conexao;
+
+    @Inject
     public UserDAO(Conexao conexao) {
         this.conexao = conexao;
     }
 
+    // Construtor sem argumentos para CDI
+    public UserDAO() {
+        this.conexao = null; // Será substituído pela injeção de dependência
+    }
     public User insert(User user){
         try(Connection conectar = conexao.conectarBanco() ){
             PreparedStatement query = conectar.prepareStatement("insert into users (name, email, role, password) values (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
