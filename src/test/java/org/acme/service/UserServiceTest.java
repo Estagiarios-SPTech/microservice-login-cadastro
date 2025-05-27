@@ -16,9 +16,6 @@ import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class UserServiceTest {
-//    @Inject
-//    UserService userService;
-
     @Mock
     private UserDAO userDAO;
 
@@ -166,6 +163,7 @@ class UserServiceTest {
                 "Gerente",
                 "123");
 
+        when(userDAO.insert(user)).thenReturn(user);
         User usuarioRetornado = userService.cadastrarUsuario(user);
 
         assertEquals(user, usuarioRetornado);
@@ -178,6 +176,7 @@ class UserServiceTest {
                 "RT",
                 "123");
 
+        when(userDAO.insert(user)).thenReturn(user);
         User usuarioRetornado = userService.cadastrarUsuario(user);
 
         assertEquals(user, usuarioRetornado);
@@ -190,6 +189,7 @@ class UserServiceTest {
                 "Colaborador",
                 "123");
 
+        when(userDAO.insert(user)).thenReturn(user);
         User usuarioRetornado = userService.cadastrarUsuario(user);
 
         assertEquals(user, usuarioRetornado);
@@ -202,6 +202,7 @@ class UserServiceTest {
                 "Admin",
                 "123");
 
+        when(userDAO.insert(user)).thenReturn(user);
         User usuarioRetornado = userService.cadastrarUsuario(user);
 
         assertEquals(user, usuarioRetornado);

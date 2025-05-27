@@ -34,7 +34,7 @@ public class UserDAO {
             query.executeUpdate();
 
             ResultSet chavePrimariaCriada = query.getGeneratedKeys();
-            while(chavePrimariaCriada.next()){
+            if(chavePrimariaCriada.next()){
                 user.setId(chavePrimariaCriada.getInt(1));
                 return user;
             }
@@ -57,6 +57,7 @@ public class UserDAO {
                         resultado.getString("role"),
                         resultado.getString("password"));
             }
+
         }
         catch (SQLException e){
             throw new RuntimeException("Erro ao procurar o usuário");
