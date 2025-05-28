@@ -27,16 +27,10 @@ import static org.mockito.Mockito.*;
 
 @QuarkusTest
 class UserDAOTest {
-    @InjectMock
-    Conexao conexao;
-
-    @Inject
-    UserDAO userDAO;
-
     public UserDAOTest() {}
 
     private Conexao mockConexao;
-//    private UserDAO userDAO;
+    private UserDAO userDAO;
     private Connection mockConnection;
     private PreparedStatement mockPreparedStatement;
     private ResultSet mockResultSet;
@@ -112,7 +106,7 @@ void authenticateLoginSucess() throws SQLException {
     public void erroAoRealizarInsercao() throws SQLException {
         User user = new User();
 
-        when(conexao.conectarBanco()).thenThrow(new SQLException());
+        when(mockConexao.conectarBanco()).thenThrow(new SQLException());
 
         RuntimeException erro = assertThrows(RuntimeException.class, () ->{
             userDAO.insert(user);
@@ -129,7 +123,7 @@ void authenticateLoginSucess() throws SQLException {
         PreparedStatement mockPreparedStatement = spy(PreparedStatement.class);
         ResultSet mockResultSet = spy(ResultSet.class);
 
-        when(conexao.conectarBanco()).thenReturn(mockConnection);
+        when(mockConexao.conectarBanco()).thenReturn(mockConnection);
         when(mockConnection.prepareStatement(anyString(), anyInt())).thenReturn(mockPreparedStatement);
         when(mockPreparedStatement.getGeneratedKeys()).thenReturn(mockResultSet);
         when(mockResultSet.next()).thenReturn(false);
@@ -139,7 +133,7 @@ void authenticateLoginSucess() throws SQLException {
 
     @Test
     public void erroAoEncontrarUser() throws SQLException {
-        when(conexao.conectarBanco()).thenThrow(new SQLException());
+        when(mockConexao.conectarBanco()).thenThrow(new SQLException());
 
         RuntimeException erro = assertThrows(RuntimeException.class, () ->{
             userDAO.findById(2);

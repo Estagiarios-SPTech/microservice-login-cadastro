@@ -6,7 +6,7 @@ import java.sql.*;
 
 @ApplicationScoped
 public class Conexao {
-    private String url = "jdbc:mysql://localhost:3306/teste";
+    private String url = "jdbc:mysql://localhost:3306/ordensof";
     private String usuario = "superColaborador";
     private String senha = "senha123!";
 

@@ -25,7 +25,8 @@ public class UserDAO {
         this.conexao = null; // Será substituído pela injeção de dependência
     }
     public User insert(User user){
-        try(Connection conectar = conexao.conectarBanco() ){
+        try{
+            Connection conectar = conexao.conectarBanco();
             PreparedStatement query = conectar.prepareStatement("insert into users (name, email, role, password) values (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             query.setString(1, user.getName());
             query.setString(2, user.getEmail());
@@ -38,6 +39,8 @@ public class UserDAO {
                 user.setId(chavePrimariaCriada.getInt(1));
                 return user;
             }
+
+            conectar.close();
         }
         catch (SQLException e){
             throw new RuntimeException("Insercao mal-sucedida");
@@ -46,11 +49,12 @@ public class UserDAO {
     }
 
     public User findById(Integer id){
-        try(Connection conectar = conexao.conectarBanco()){
+        try{
+            Connection conectar = conexao.conectarBanco();
             PreparedStatement query = conectar.prepareStatement("select * from users where id = ?");
             query.setInt(1, id);
             ResultSet resultado = query.executeQuery();
-            while(resultado.next()){
+            if(resultado.next()){
                 return new User(resultado.getInt("id"),
                         resultado.getString("name"),
                         resultado.getString("email"),
@@ -58,6 +62,7 @@ public class UserDAO {
                         resultado.getString("password"));
             }
 
+            conectar.close();
         }
         catch (SQLException e){
             throw new RuntimeException("Erro ao procurar o usuário");
