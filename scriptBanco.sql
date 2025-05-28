@@ -31,6 +31,8 @@ create table ordensFornecimento (
 );
 
 insert into users (`name`, email, `role`, `password`) values ('Rafael', 'rafael@stefanini.com', 'Admin', '123');
+insert into users (`name`, email, `role`, `password`) values ('Shirley', 'shirley@stefanini.com', 'RT', '123');
+insert into users (`name`, email, `role`, `password`) values ('Ezequiel', 'ezequiel@stefanini.com', 'Gerente', '123');
 
 select * from users;
 select * from employees;
