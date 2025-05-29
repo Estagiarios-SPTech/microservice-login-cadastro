@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -206,6 +207,17 @@ class UserServiceTest {
         User usuarioRetornado = userService.cadastrarUsuario(user);
 
         assertEquals(user, usuarioRetornado);
+    }
+
+    @Test
+    public void usuarioInexistente(){
+        when(userDAO.findById(any(Integer.class))).thenReturn(null);
+
+        RuntimeException mensagemErro = assertThrows(RuntimeException.class,() -> {
+            userService.retornarUsuariosRelacionados(1);
+        });
+
+        assertEquals("Usuário inexistente", mensagemErro.getMessage());
     }
 
     @Test

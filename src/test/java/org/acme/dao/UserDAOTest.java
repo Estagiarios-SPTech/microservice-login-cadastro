@@ -141,4 +141,9 @@ void authenticateLoginSucess() throws SQLException {
 
         assertEquals("Erro ao procurar o usuário", erro.getMessage());
     }
+
+    @Test
+    public void usuarioNaoEncontrado(){
+        assertNull(userDAO.findById(0), "O método deve retornar null");
+    }
 }
