@@ -2,7 +2,7 @@ package org.acme.service;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.acme.dao.CollaboratorDAO;
-import org.acme.model.Collaborator;
+import org.acme.model.Employee;
 import org.acme.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class CollaboratorServiceTest {
 
     @Test
     public void classeCollaboratorNull(){
-        Collaborator collaborator = null;
+        Employee collaborator = null;
 
         RuntimeException mensagemErro = assertThrows(RuntimeException.class, () ->{
             collaboratorService.cadastrarColaborador(collaborator);
@@ -49,7 +49,7 @@ class CollaboratorServiceTest {
                 "123");
         User rt = new User(2);
         User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -65,7 +65,7 @@ class CollaboratorServiceTest {
         User user = new User(null);
         User rt = new User(2);
         User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -84,7 +84,7 @@ class CollaboratorServiceTest {
                 "123");
         User rt = new User(null);
         User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -103,7 +103,7 @@ class CollaboratorServiceTest {
                 "123");
         User rt = new User(2);
         User gerente = new User(null);
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -123,7 +123,7 @@ class CollaboratorServiceTest {
         User rt = new User(2);
         rt.setRole("RT");
         User gerente = rt;
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -145,7 +145,7 @@ class CollaboratorServiceTest {
         User gerente = new User(2);
         gerente.setRole("Gerente");
         User rt = gerente;
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -166,7 +166,7 @@ class CollaboratorServiceTest {
                 "123");
         User rt = new User(2);
         User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 
@@ -206,7 +206,7 @@ class CollaboratorServiceTest {
         rt.setRole("RT");
         User gerente = new User(3);
         gerente.setRole("Gerente");
-        Collaborator collaborator = new Collaborator(user,
+        Employee collaborator = new Employee(user,
                 rt,
                 gerente);
 

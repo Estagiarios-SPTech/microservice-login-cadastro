@@ -3,7 +3,7 @@ package org.acme.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.dao.CollaboratorDAO;
-import org.acme.model.Collaborator;
+import org.acme.model.Employee;
 
 @ApplicationScoped
 public class CollaboratorService {
@@ -13,28 +13,23 @@ public class CollaboratorService {
     @Inject
     UserService userService;
 
-    public Collaborator cadastrarColaborador(Collaborator collaborator){
+    public Employee cadastrarColaborador(Employee collaborator){
         if(collaborator == null){
             throw new RuntimeException("Collaborator não pode ser null");
         }
+        System.out.println(collaborator);
+        collaborator.setRt(userService.retornarUsuariosRelacionados(collaborator.getRt().getName()));
+        collaborator.setManager(userService.retornarUsuariosRelacionados(collaborator.getManager().getName()));
 
-        if(collaborator.getRt().getId() == null ||
-        collaborator.getManager().getId() == null){
-            throw new RuntimeException("Os usuários associados não podem ter o id nulo");
-        }
-
-        collaborator.setRt(userService.retornarUsuariosRelacionados(collaborator.getRt().getId()));
-        collaborator.setManager(userService.retornarUsuariosRelacionados(collaborator.getManager().getId()));
-
-        if(collaborator.getCollaborator().getRole() == null ||
-           !collaborator.getCollaborator().getRole().equals("Colaborador")){
+        if(collaborator.getUser().getRole() == null ||
+           !collaborator.getUser().getRole().equals("Colaborador")){
             throw new RuntimeException("Usuário cadastrado não é colaborador");
         }
         if(!collaborator.getRt().getRole().equals("RT") ||
            !collaborator.getManager().getRole().equals("Gerente")){
             throw new RuntimeException("Usuários informados nos campos errados");
         }
-        collaborator.setCollaborator(userService.cadastrarUsuario(collaborator.getCollaborator()));
+        collaborator.setUser(userService.cadastrarUsuario(collaborator.getUser()));
         return collaboratorDAO.insert(collaborator);
     }
 }

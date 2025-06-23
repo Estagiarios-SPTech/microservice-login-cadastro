@@ -1,23 +1,23 @@
 package org.acme.model;
 
-public class Collaborator {
+public class Employee {
     private Integer id;
-    private User collaborator;
+    private User user;
     private User rt;
     private User manager;
 
-    public Collaborator() {
+    public Employee() {
     }
 
-    public Collaborator(User collaborator, User rt, User manager) {
-        this.collaborator = collaborator;
+    public Employee(User collaborator, User rt, User manager) {
+        this.user = collaborator;
         this.rt = rt;
         this.manager = manager;
     }
 
-    public Collaborator(Integer id, User collaborator, User rt, User manager) {
+    public Employee(Integer id, User collaborator, User rt, User manager) {
         this.id = id;
-        this.collaborator = collaborator;
+        this.user = collaborator;
         this.rt = rt;
         this.manager = manager;
     }
@@ -30,12 +30,12 @@ public class Collaborator {
         this.id = id;
     }
 
-    public User getCollaborator() {
-        return collaborator;
+    public User getUser() {
+        return user;
     }
 
-    public void setCollaborator(User collaborator) {
-        this.collaborator = collaborator;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User getRt() {
@@ -58,7 +58,7 @@ public class Collaborator {
     public String toString() {
         return "Collaborator{" +
                 "id=" + id +
-                ", collaborator=" + collaborator +
+                ", collaborator=" + user +
                 ", rt=" + rt +
                 ", manager=" + manager +
                 '}';

@@ -27,7 +27,7 @@ public class UserDAO {
     public User insert(User user){
         try{
             Connection conectar = conexao.conectarBanco();
-            PreparedStatement query = conectar.prepareStatement("insert into users (name, email, role, password) values (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement query = conectar.prepareStatement("insert into user (name, email, role, password) values (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             query.setString(1, user.getName());
             query.setString(2, user.getEmail());
             query.setString(3, user.getRole());
@@ -48,11 +48,11 @@ public class UserDAO {
         return null;
     }
 
-    public User findById(Integer id){
+    public User findByName(String name){
         try{
             Connection conectar = conexao.conectarBanco();
-            PreparedStatement query = conectar.prepareStatement("select * from users where id = ?");
-            query.setInt(1, id);
+            PreparedStatement query = conectar.prepareStatement("select * from user where name = ?");
+            query.setString(1, name);
             ResultSet resultado = query.executeQuery();
             if(resultado.next()){
                 return new User(resultado.getInt("id"),
@@ -71,7 +71,7 @@ public class UserDAO {
     }
 
     public User autenticarLogin(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
         try (Connection conn = conexao.conectarBanco();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, email);

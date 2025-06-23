@@ -25,7 +25,7 @@ class CollaboratorTest {
                 "Gerente",
                 "123");
 
-        Collaborator collaborator = new Collaborator(1 , user, rt, gerente);
+        Employee collaborator = new Employee(1 , user, rt, gerente);
 
         String esperado = "Collaborator{id=1, collaborator=User{id=1, name='test', email='test@gmail.com', role='Colaborador', password='123'}, rt=User{id=1, name='test', email='test@gmail.com', role='RT', password='123'}, manager=User{id=1, name='test', email='test@gmail.com', role='Gerente', password='123'}}";
 

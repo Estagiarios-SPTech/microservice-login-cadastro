@@ -3,7 +3,7 @@ package org.acme.dao;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.acme.Conexao;
-import org.acme.model.Collaborator;
+import org.acme.model.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,11 +15,11 @@ public class CollaboratorDAO {
     @Inject
     Conexao conexao;
 
-    public Collaborator insert(Collaborator collaborator){
+    public Employee insert(Employee collaborator){
         try{
             Connection conectar = conexao.conectarBanco();
-            PreparedStatement query = conectar.prepareStatement("insert into employees (`user`, rt, manager) values (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            query.setObject(1, collaborator.getCollaborator().getId());
+            PreparedStatement query = conectar.prepareStatement("insert into employee (`user`, rt, manager) values (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            query.setObject(1, collaborator.getUser().getId());
             query.setObject(2, collaborator.getRt().getId());
             query.setObject(3, collaborator.getManager().getId());
             query.executeUpdate();

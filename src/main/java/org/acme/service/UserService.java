@@ -31,11 +31,11 @@ public class UserService {
         return userDAO.insert(user);
     }
 
-    public User retornarUsuariosRelacionados(Integer id){
-        if(userDAO.findById(id) == null){
+    public User retornarUsuariosRelacionados(String name){
+        if(userDAO.findByName(name) == null){
             throw new RuntimeException("Usuário inexistente");
         }
-        return userDAO.findById(id);
+        return userDAO.findByName(name);
     }
 
     public String login(User user){

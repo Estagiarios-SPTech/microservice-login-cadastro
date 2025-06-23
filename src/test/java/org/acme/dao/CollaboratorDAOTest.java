@@ -4,7 +4,7 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import org.acme.Conexao;
-import org.acme.model.Collaborator;
+import org.acme.model.Employee;
 import org.acme.model.User;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ class CollaboratorDAOTest {
 
     @Test
     public void erroAoRealizarInsercao() throws SQLException {
-        Collaborator collaborator = new Collaborator();
+        Employee collaborator = new Employee();
 
         when(conexao.conectarBanco()).thenThrow(new SQLException());
 
@@ -44,7 +44,7 @@ class CollaboratorDAOTest {
         User user = new User(1);
         User rt = new User(2);
         User gerente = new User(3);
-        Collaborator collaborator = new Collaborator(user, rt, gerente);
+        Employee collaborator = new Employee(user, rt, gerente);
 
         Connection mockConnection = spy(Connection.class);
         PreparedStatement mockPreparedStatement = spy(PreparedStatement.class);
@@ -56,7 +56,7 @@ class CollaboratorDAOTest {
 
         when(mockResultSet.next()).thenReturn(false);
 
-        Collaborator resultado = collaboratorDAO.insert(collaborator);
+        Employee resultado = collaboratorDAO.insert(collaborator);
 
         assertNull(resultado, "O método deve retornar null quando não há chaves geradas");
     }
