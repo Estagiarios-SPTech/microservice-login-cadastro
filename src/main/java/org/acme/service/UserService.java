@@ -31,6 +31,17 @@ public class UserService {
         return userDAO.insert(user);
     }
 
+    public Boolean verificarEmailExistente(String email){
+        if(email == null){
+            throw new RuntimeException("O e-mail não pode ser nulo");
+        }
+        else if(email.isEmpty()){
+            throw new RuntimeException("O e-mail não pode estar vazio");
+        }
+
+        return userDAO.verificarEmailExistente(email);
+    }
+
     public User retornarUsuariosRelacionados(String name){
         if(userDAO.findByName(name) == null){
             throw new RuntimeException("Usuário inexistente");

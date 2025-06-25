@@ -4,10 +4,7 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.model.User;
@@ -26,6 +23,12 @@ public class UserController {
     @Path("/cadastrar")
     public Response endpointCadastrar(User user){
         return Response.ok(userService.cadastrarUsuario(user)).build();
+    }
+
+    @GET
+    @Path("/verificarEmail/{email}")
+    public Response verificarEmailExistente(@PathParam("email") String email){
+        return Response.ok(userService.verificarEmailExistente(email)).build();
     }
 
     @POST

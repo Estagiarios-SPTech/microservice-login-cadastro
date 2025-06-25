@@ -48,6 +48,19 @@ public class UserDAO {
         return null;
     }
 
+    public Boolean verificarEmailExistente(String email){
+        try(Connection conectar = conexao.conectarBanco()){
+            PreparedStatement query = conectar.prepareStatement("select count(email) from `user` where email = ?");
+            query.setString(1, email);
+            ResultSet resultado = query.executeQuery();
+            resultado.next();
+            return resultado.getInt("count(email)") > 0;
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public User findByName(String name){
         try{
             Connection conectar = conexao.conectarBanco();
