@@ -10,9 +10,11 @@ public class TokenService {
         return Jwt.issuer("http://localhost:8080/gerarToken")
                 .upn(user.getEmail())
                 .groups(user.getRole())
+                .claim("id", user.getId())
                 .claim("name", user.getName())
                 .claim("email", user.getEmail())
                 .claim("role", user.getRole())
+                .claim("password", user.getPassword())
                 .sign();
     }
 }
