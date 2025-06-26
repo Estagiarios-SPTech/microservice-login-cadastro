@@ -18,9 +18,9 @@ create table employee (
     rt int,
     manager int,
     `status` varchar(30),
-    foreign key (`user`) references users(id),
-    foreign key (rt) references users(id),
-    foreign key (manager) references users(id)
+    foreign key (`user`) references `user`(id),
+    foreign key (rt) references `user`(id),
+    foreign key (manager) references `user`(id)
 );
 
 create table ordem_fornecimento (
@@ -34,6 +34,7 @@ create table ordem_fornecimento (
 insert into `user` (`name`, email, `role`, `password`) values ('Rafael', 'rafael@stefanini.com', 'Admin', '123');
 insert into `user` (`name`, email, `role`, `password`) values ('Shirley', 'shirley@stefanini.com', 'RT', '123');
 insert into `user` (`name`, email, `role`, `password`) values ('Ezequiel', 'ezequiel@stefanini.com', 'Gerente', '123');
+insert into `user` (`name`, email, `role`, `password`) values ('Teste', 'teste@stefanini.com', 'Colaborador', 'Teste123!');
 
 select * from `user`;
 select * from employee;
