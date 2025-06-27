@@ -5,6 +5,7 @@ public class Employee {
     private User user;
     private User rt;
     private User manager;
+    private String status;
 
     public Employee() {
     }
@@ -52,6 +53,14 @@ public class Employee {
 
     public void setManager(User manager) {
         this.manager = manager;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

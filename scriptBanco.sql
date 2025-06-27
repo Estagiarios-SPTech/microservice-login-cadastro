@@ -35,6 +35,9 @@ insert into `user` (`name`, email, `role`, `password`) values ('Rafael', 'rafael
 insert into `user` (`name`, email, `role`, `password`) values ('Shirley', 'shirley@stefanini.com', 'RT', '123');
 insert into `user` (`name`, email, `role`, `password`) values ('Ezequiel', 'ezequiel@stefanini.com', 'Gerente', '123');
 
+select `name`, email, `role`, `status` from `user`
+join employee on `user` = `user`.id where rt = 2;
+
 select * from `user`;
 select * from employee;
 select * from ordem_fornecimento;

@@ -5,6 +5,8 @@ import jakarta.inject.Inject;
 import org.acme.dao.CollaboratorDAO;
 import org.acme.model.Employee;
 
+import java.util.List;
+
 @ApplicationScoped
 public class CollaboratorService {
     @Inject
@@ -31,5 +33,9 @@ public class CollaboratorService {
         }
         collaborator.setUser(userService.cadastrarUsuario(collaborator.getUser()));
         return collaboratorDAO.insert(collaborator);
+    }
+
+    public List<Employee> acharColaboradoresRelacionados(Integer id){
+        return collaboratorDAO.mostrarColaboradoresRelacionados(id);
     }
 }
