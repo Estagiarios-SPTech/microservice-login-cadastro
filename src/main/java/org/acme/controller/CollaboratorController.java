@@ -25,7 +25,7 @@ public class CollaboratorController {
 
     @GET
     @Path("/employees/{id}")
-    public Response teste(@PathParam("id") Integer id){
+    public Response acharColaboradoresRelacionados(@PathParam("id") Integer id){
         return Response.ok(collaboratorService.acharColaboradoresRelacionados(id)).build();
     }
 }

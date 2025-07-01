@@ -42,11 +42,11 @@ public class UserService {
         return userDAO.verificarEmailExistente(email);
     }
 
-    public User retornarUsuariosRelacionados(String name){
-        if(userDAO.findByName(name) == null){
+    public User retornarUsuariosRelacionados(String email){
+        if(userDAO.findByEmail(email) == null){
             throw new RuntimeException("Usuário inexistente");
         }
-        return userDAO.findByName(name);
+        return userDAO.findByEmail(email);
     }
 
     public String login(User user){

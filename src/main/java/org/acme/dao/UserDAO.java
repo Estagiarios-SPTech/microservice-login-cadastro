@@ -61,11 +61,11 @@ public class UserDAO {
         }
     }
 
-    public User findByName(String name){
+    public User findByEmail(String email){
         try{
             Connection conectar = conexao.conectarBanco();
-            PreparedStatement query = conectar.prepareStatement("select * from user where name = ?");
-            query.setString(1, name);
+            PreparedStatement query = conectar.prepareStatement("select * from user where email = ?");
+            query.setString(1, email);
             ResultSet resultado = query.executeQuery();
             if(resultado.next()){
                 return new User(resultado.getInt("id"),
@@ -97,7 +97,7 @@ public class UserDAO {
                         rs.getString("role"),
                         rs.getString("password"));
             } else {
-                System.out.println(email + "ola" + password);
+                System.out.println(email + " " + password);
                 throw new UserNotRegisteredException("Usuário não encontrado");
             }
 

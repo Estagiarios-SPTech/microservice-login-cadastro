@@ -20,8 +20,8 @@ public class CollaboratorService {
             throw new RuntimeException("Collaborator não pode ser null");
         }
         System.out.println(collaborator);
-        collaborator.setRt(userService.retornarUsuariosRelacionados(collaborator.getRt().getName()));
-        collaborator.setManager(userService.retornarUsuariosRelacionados(collaborator.getManager().getName()));
+        collaborator.setRt(userService.retornarUsuariosRelacionados(collaborator.getRt().getEmail()));
+        collaborator.setManager(userService.retornarUsuariosRelacionados(collaborator.getManager().getEmail()));
 
         if(collaborator.getUser().getRole() == null ||
            !collaborator.getUser().getRole().equals("Colaborador")){
