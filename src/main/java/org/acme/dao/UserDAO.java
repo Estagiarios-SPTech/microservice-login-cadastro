@@ -61,10 +61,10 @@ public class UserDAO {
         }
     }
 
-    public User findByEmail(String email){
+    public User findByName(String email){
         try{
             Connection conectar = conexao.conectarBanco();
-            PreparedStatement query = conectar.prepareStatement("select * from user where email = ?");
+            PreparedStatement query = conectar.prepareStatement("select * from user where name = ?");
             query.setString(1, email);
             ResultSet resultado = query.executeQuery();
             if(resultado.next()){
